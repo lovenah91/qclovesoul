@@ -1,0 +1,347 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#fbf1ef">
+<title>SOUL 靈氣療癒 · @qclovesoul</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@500;700&display=swap">
+<style>
+/* Mobile-first: sticky top nav (swipeable) → hero → services → rainbow cards → about → IG → feedback → FAQ → contact; fixed bottom bar for DM booking on phones. */
+:root{
+  --bg:#fbf1ef;--surface:#fffaf9;--fg:#4a3a3d;--dim:#8a7075;
+  --accent:#b85c6e;--accent-fg:#ffffff;--sage:#97754f;--line:#f0d9d8;--soft:#f7e0e1;
+  --serif:"Noto Serif TC","Songti TC","PMingLiU",serif;
+  --sans:"Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif;
+  --barH:68px;
+}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1c1316;--surface:#281b20;--fg:#f6e6e6;--dim:#bfa0a6;--accent:#e8a0ae;--accent-fg:#2a1519;--sage:#dcbc92;--line:#422d34;--soft:#35242b;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#1c1316;--surface:#281b20;--fg:#f6e6e6;--dim:#bfa0a6;--accent:#e8a0ae;--accent-fg:#2a1519;--sage:#dcbc92;--line:#422d34;--soft:#35242b;color-scheme:dark}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth;scroll-padding-top:64px;-webkit-text-size-adjust:100%}
+body{margin:0;background-color:var(--bg);background-image:radial-gradient(circle at 100% 0,color-mix(in srgb,var(--accent) 16%,transparent),transparent 38%),radial-gradient(circle at 0 100%,color-mix(in srgb,var(--accent) 14%,transparent),transparent 36%);background-attachment:fixed;color:var(--fg);font-family:var(--sans);font-size:16px;line-height:1.7;padding:0 16px calc(var(--barH) + env(safe-area-inset-bottom) + 24px);overflow-x:hidden}
+.wrap{max-width:880px;margin:0 auto;display:grid;gap:52px}
+h1,h2,h3{font-family:var(--serif);margin:0;text-wrap:balance;line-height:1.35}
+h2{font-size:clamp(22px,5.6vw,26px)}
+p{margin:0}
+a{color:var(--accent)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+/* 頂部導覽：手機可左右滑動 */
+nav{position:sticky;top:0;z-index:20;margin:0 -16px;padding:10px 16px 8px;background:color-mix(in srgb,var(--bg) 88%,transparent);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-bottom:1px solid color-mix(in srgb,var(--line) 70%,transparent)}
+.navin{max-width:880px;margin:0 auto;display:grid;gap:6px}
+.logo{font-family:var(--serif);font-weight:700;font-size:18px;letter-spacing:.1em;color:var(--fg);text-decoration:none}
+.links{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;margin:0 -16px;padding:0 16px}
+.links::-webkit-scrollbar{display:none}
+.links a{flex:0 0 auto;text-decoration:none;color:var(--dim);font-size:14px;padding:6px 14px;border-radius:999px;border:1px solid var(--line);background:var(--surface)}
+.links a:active{background:var(--soft)}
+@media(min-width:720px){.navin{grid-template-columns:auto 1fr;align-items:center}.links{justify-content:flex-end;margin:0;padding:0}.links a{border-color:transparent;background:none}.links a:hover{color:var(--accent)}}
+
+/* 主視覺 */
+.hero{display:grid;gap:22px;align-items:center;text-align:center;padding-top:8px}
+.rings{position:relative;aspect-ratio:1;width:min(62vw,240px);margin:12px auto 0;overflow:hidden;border-radius:50%;box-shadow:0 0 0 6px color-mix(in srgb,var(--surface) 70%,transparent),0 0 36px 4px color-mix(in srgb,var(--accent) 32%,transparent),0 0 80px 12px color-mix(in srgb,var(--sage) 22%,transparent)}
+.rings img{display:block;width:100%;height:100%;object-fit:cover;transform:scale(1.06);animation:breathe 7s ease-in-out infinite}
+@keyframes breathe{50%{transform:scale(1.09)}}
+.hero h1{font-size:clamp(28px,8vw,44px);letter-spacing:.04em}
+.hero p{color:var(--dim);margin:14px auto 0;max-width:30em}
+@media(min-width:720px){.hero{grid-template-columns:1.1fr .9fr;text-align:left}.hero .rings{order:2;width:100%;max-width:360px}.hero p{margin-left:0}.hero .cta{justify-content:flex-start}}
+
+.tag{font-size:12px;letter-spacing:.16em;color:var(--sage);font-weight:700}
+.head{display:grid;gap:6px;margin-bottom:18px}
+.head p{color:var(--dim);font-size:15px}
+
+.cta{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px;justify-content:center}
+.btn{font:500 16px var(--sans);border:1px solid var(--accent);background:var(--accent);color:var(--accent-fg);min-height:48px;padding:11px 24px;border-radius:999px;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:6px;transition:transform .15s}
+.btn:active{transform:scale(.97)}
+.btn.ghost{background:transparent;color:var(--accent)}
+.btn.sm{min-height:42px;font-size:15px;padding:8px 18px}
+@media(max-width:479px){.hero .cta .btn{flex:1 1 100%}}
+
+/* 服務 */
+.chips{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;margin:0 -16px 14px;padding:2px 16px}
+.chips::-webkit-scrollbar{display:none}
+.chip{flex:0 0 auto;font:500 14px var(--sans);min-height:38px;padding:6px 16px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--fg);cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--accent);color:var(--accent-fg);border-color:var(--accent)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,260px),1fr));gap:12px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:18px;display:grid;gap:10px;align-content:start;min-width:0}
+.svc{grid-template-columns:auto minmax(0,1fr);column-gap:14px}
+.svc>.glyph{grid-row:span 2;align-self:start}
+.svc h3{font-size:18px}
+.svc .meta{display:flex;flex-wrap:wrap;gap:4px 12px;font-size:14px;color:var(--dim);font-variant-numeric:tabular-nums}
+.svc .price{color:var(--fg);font-weight:700}
+.svc p,.svc .badge,.svc .btn{grid-column:1/-1}
+.card p{font-size:15px;color:var(--dim)}
+.svc .btn{justify-self:stretch}
+.badge{justify-self:start;font-size:12px;font-weight:700;color:var(--accent);background:var(--soft);border-radius:999px;padding:3px 12px}
+.glyph{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;font-family:var(--serif);font-weight:700;color:var(--accent-fg);background:linear-gradient(140deg,var(--accent),var(--sage));flex:none}
+
+/* 彩虹牌 */
+.deck{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:clamp(5px,1.6vw,12px);max-width:640px;margin:0 auto;padding:12px 0 4px}
+.pk{position:relative;width:100%;aspect-ratio:2/3;perspective:700px;background:none;border:0;padding:0;cursor:pointer;transition:transform .25s,opacity .4s}
+.pk:hover:not(:disabled){transform:translateY(-6px)}
+.pk:disabled{cursor:default}
+.pk.dim{opacity:.28}
+.pk .in{position:absolute;inset:0;transition:transform .7s cubic-bezier(.3,.7,.2,1);transform-style:preserve-3d}
+.pk.flip .in{transform:rotateY(180deg)}
+.pk .f,.pk .b{position:absolute;inset:0;border-radius:clamp(6px,1.6vw,10px);backface-visibility:hidden;-webkit-backface-visibility:hidden;display:grid;place-items:center;box-shadow:0 6px 16px color-mix(in srgb,var(--accent) 22%,transparent)}
+.pk .b{background:conic-gradient(from 200deg,#f6a5a5,#f8c89a,#f6e7a0,#b5e3b5,#a5d3f2,#b8b4f0,#e3b0ee,#f6a5a5);border:2px solid var(--surface)}
+.pk .b::after{content:"✦";color:#fff;font-size:clamp(13px,3.4vw,24px);text-shadow:0 0 10px rgba(255,255,255,.9)}
+.pk .f{transform:rotateY(180deg);color:#4a2f3a;font-family:var(--serif);font-weight:700;font-size:clamp(16px,4.4vw,28px);border:2px solid var(--surface)}
+.draw{margin:18px auto 0;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:22px 20px;display:grid;gap:8px;text-align:center;max-width:560px;width:100%}
+.draw .sw{width:56px;height:6px;border-radius:99px;margin:0 auto 4px}
+.draw h3{font-size:22px}
+.draw .kw{color:var(--sage);font-weight:700;letter-spacing:.14em;font-size:13px}
+.draw p{color:var(--fg);font-size:15px;text-align:left;white-space:pre-line}
+.draw .cta{margin-top:12px}
+
+/* 主理人 */
+.teacher{grid-template-columns:auto minmax(0,1fr);gap:2px 16px;align-items:center}
+.avatar{grid-row:span 3;width:76px;height:76px;border-radius:50%;object-fit:cover;border:3px solid var(--surface);box-shadow:0 0 0 2px var(--accent),0 4px 18px color-mix(in srgb,var(--accent) 35%,transparent)}
+.teacher small{color:var(--sage);font-weight:700;font-size:13px;letter-spacing:.06em}
+.teacher h3{font-size:19px}
+
+/* IG */
+.ig{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px clamp(14px,5vw,44px);max-width:760px;margin:0 auto}
+.ig a{display:grid;gap:10px;justify-items:center;text-decoration:none;color:var(--fg);font-size:clamp(13px,3.4vw,15px);font-weight:500;text-align:center;min-width:0}
+.ig .c{display:block;width:100%;aspect-ratio:1;border-radius:50%;overflow:hidden;background:var(--soft);box-shadow:0 10px 26px color-mix(in srgb,var(--accent) 22%,transparent)}
+.ig img{display:block;width:100%;height:100%;object-fit:cover}
+
+/* 回饋（手機左右滑） */
+.swipe{display:grid;grid-auto-flow:column;grid-auto-columns:min(82%,300px);gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;margin:0 -16px;padding:2px 16px 6px}
+.swipe::-webkit-scrollbar{display:none}
+.swipe>*{scroll-snap-align:start}
+@media(min-width:720px){.swipe{grid-auto-flow:row;grid-template-columns:repeat(3,1fr);grid-auto-columns:auto;overflow:visible;margin:0;padding:0}}
+.fb p{color:var(--fg);white-space:pre-line}
+.fb .who{font-size:13px;color:var(--dim);display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.hint{font-size:12px;color:var(--dim);text-align:right;margin-top:6px}
+@media(min-width:720px){.hint{display:none}}
+
+/* FAQ */
+.list{display:grid;gap:10px}
+details{background:var(--surface);border:1px solid var(--line);border-radius:14px}
+summary{cursor:pointer;font-weight:700;font-size:16px;padding:14px 44px 14px 16px;list-style:none;position:relative}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";position:absolute;right:16px;top:50%;transform:translateY(-50%);font-size:22px;font-weight:400;color:var(--accent)}
+details[open] summary::after{content:"−"}
+details p{padding:0 16px 16px;color:var(--dim);font-size:15px}
+
+/* 合作 */
+.mail{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:18px;display:grid;gap:14px}
+.addr{font-family:ui-monospace,Consolas,monospace;font-size:16px;color:var(--accent);font-weight:700;overflow-wrap:anywhere;user-select:all;min-width:0}
+.mail .cta{margin:0;display:grid;grid-template-columns:1fr 1fr}
+@media(min-width:720px){.mail{grid-template-columns:1fr auto;align-items:center}.mail .cta{display:flex}}
+footer{text-align:center;color:var(--dim);font-size:12px}
+
+/* 手機底部固定按鈕 */
+.bar{position:fixed;left:0;right:0;bottom:0;z-index:30;display:grid;grid-template-columns:1fr auto;gap:10px;padding:10px 16px calc(10px + env(safe-area-inset-bottom));background:color-mix(in srgb,var(--surface) 92%,transparent);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border-top:1px solid var(--line)}
+.bar .btn{min-height:48px}
+@media(min-width:720px){.bar{display:none}body{padding-bottom:48px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="navin">
+    <a class="logo" href="#top">@qclovesoul</a>
+    <div class="links"><a href="#services">服務</a><a href="#rainbow">抽牌</a><a href="#about">主理人</a><a href="#feedback">回饋</a><a href="#faq">問答</a><a href="#contact">合作</a></div>
+  </div>
+</nav>
+
+<div class="wrap" id="top">
+  <section class="hero">
+    <div class="rings"><img src="images/soul.jpg" alt="SOUL 靈氣療癒標誌" width="600" height="600"></div>
+    <div>
+      <div class="tag">身 · 心 · 靈 工作室</div>
+      <h1>給忙碌的你，<br>一段安靜的時間</h1>
+      <p>靈氣、樹洞聆聽與生命靈數，一對一陪伴，也提供遠距靈氣。想預約或詢問，直接私訊 Instagram 就可以。</p>
+      <div class="cta">
+        <a class="btn dm" href="#" target="_blank" rel="noopener">私訊預約</a>
+        <a class="btn ghost" href="#services">看服務項目</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="services">
+    <div class="head"><div class="tag">服務項目</div><h2>選擇適合你的課程</h2></div>
+    <div class="chips" id="chips"></div>
+    <div class="grid" id="svcGrid"></div>
+  </section>
+
+  <section id="rainbow">
+    <div class="head"><div class="tag">彩虹牌抽卡</div><h2>為今天抽一張牌</h2><p>靜下來，深呼吸，心裡想著此刻最在意的事，再憑直覺點選一張牌。</p></div>
+    <div class="deck" id="deck" role="group" aria-label="七張牌背，請選一張"></div>
+    <div class="draw" id="draw" hidden></div>
+    <div class="cta" style="margin-top:16px"><button class="btn ghost sm" type="button" id="reshuffle">重新洗牌</button></div>
+  </section>
+
+  <section id="about">
+    <div class="head"><div class="tag">主理人</div><h2>認識陪伴你的人</h2></div>
+    <div id="tGrid"></div>
+  </section>
+
+  <section>
+    <div class="head"><div class="tag">INSTAGRAM</div><h2>日常分享</h2><p>最新靜心練習與活動消息，歡迎到 <a id="igLink" href="#" target="_blank" rel="noopener">@qclovesoul</a> 看看。</p></div>
+    <div class="ig" id="igGrid"></div>
+  </section>
+
+  <section id="feedback">
+    <div class="head"><div class="tag">客戶回饋</div><h2>他們的分享</h2><p>以下三則為示範內容，之後會換成真實的個案回饋。</p></div>
+    <div class="swipe" id="fbWall"></div>
+    <div class="hint">← 左右滑動看更多</div>
+  </section>
+
+  <section id="faq">
+    <div class="head"><div class="tag">常見問題</div><h2>預約前想知道的事</h2></div>
+    <div class="list" id="faqList"></div>
+  </section>
+
+  <section id="contact">
+    <div class="head"><div class="tag">合作洽談</div><h2>異業結盟</h2><p>活動、講座、品牌合作都歡迎來信，請簡述合作內容與時間。</p></div>
+    <div class="mail">
+      <span class="addr" id="mailAddr">a22817595@gmail.com</span>
+      <div class="cta">
+        <button class="btn sm" type="button" id="copyMail">複製信箱</button>
+        <a class="btn ghost sm" href="mailto:a22817595@gmail.com?subject=合作洽談">開啟郵件</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>© SOUL 靈氣療癒 · @qclovesoul</footer>
+</div>
+
+<div class="bar">
+  <a class="btn dm" href="#" target="_blank" rel="noopener">私訊 IG 預約</a>
+  <a class="btn ghost" id="igBar" href="#" target="_blank" rel="noopener" aria-label="前往 Instagram">IG</a>
+</div>
+
+<script>
+/* ★ 你的 Instagram 帳號（不含 @） */
+const IG_HANDLE='qclovesoul';
+
+/* min: 分鐘（0＝依需求）；price: 元（0＝請私訊詢價） */
+const SERVICES=[
+  {id:'charity',cat:'公益',name:'公益隨喜療癒回饋',min:0,price:0,priceText:'金額隨喜',until:'2026-12-31',d:'2026/12/31 前的限定服務。金額隨喜，一部分會捐給公益。完成服務後，請留下一段文字回饋。'},
+  {id:'reiki-r',cat:'靈氣',name:'遠距靈氣',min:15,price:480,d:'不用到現場，線上接收靈氣能量，快速平衡當下的狀態。'},
+  {id:'reiki',cat:'靈氣',name:'靈氣療癒',min:60,price:1800,d:'完整一小時的靈氣能量療癒，幫助身心回到穩定與放鬆。'},
+  {id:'listen',cat:'聆聽',name:'樹洞聆聽',min:30,price:600,d:'把說不出口的話交給我，30 分鐘安心傾訴，有人認真聽你說。'},
+  {id:'num',cat:'生命靈數',name:'生命靈數',min:0,price:0,d:'從生日數字看你的天賦與課題，詳情與價格請私訊詢問。'}
+];
+const TEACHERS=[
+  {n:'主理人',img:'images/avatar.jpg',role:'靈氣 · 樹洞聆聽 · 生命靈數',bio:'在 Instagram @qclovesoul 分享身心靈日常，歡迎先追蹤認識。'}
+];
+
+const $=id=>document.getElementById(id);
+const pad=n=>String(n).padStart(2,'0');
+const ymd=d=>`${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
+const esc=s=>s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+/* 有 until 的服務，過期後自動從列表消失 */
+for(let i=SERVICES.length-1;i>=0;i--)if(SERVICES[i].until&&SERVICES[i].until<ymd(new Date()))SERVICES.splice(i,1);
+const fmtPrice=s=>s.priceText?s.priceText:s.price?`NT$ ${s.price.toLocaleString()}`:'價格請私訊';
+const fmtMin=s=>s.min?`${s.min} 分鐘`:'時長依需求';
+
+/* IG 連結 */
+const igUrl=`https://www.instagram.com/${IG_HANDLE}/`;
+const dmUrl=`https://ig.me/m/${IG_HANDLE}`;
+document.querySelectorAll('.dm').forEach(a=>a.href=dmUrl);
+$('igBar').href=igUrl;$('igLink').href=igUrl;$('igLink').textContent='@'+IG_HANDLE;
+[['images/post-reiki.jpg','靈氣療癒'],['images/post-listen.jpg','樹洞聆聽'],['images/post-numerology.jpg','生命靈數']].forEach(([src,t])=>{
+  const a=document.createElement('a');a.href=igUrl;a.target='_blank';a.rel='noopener';a.setAttribute('aria-label',t+'（前往 Instagram）');
+  a.innerHTML=`<span class="c"><img src="${src}" alt="${t}" width="400" height="400" loading="lazy"></span><span>${t}</span>`;
+  $('igGrid').appendChild(a);
+});
+
+/* 服務 */
+let cat='全部';
+const cats=['全部',...new Set(SERVICES.map(s=>s.cat))];
+function renderChips(){
+  $('chips').innerHTML='';
+  cats.forEach(c=>{const b=document.createElement('button');b.type='button';b.className='chip';b.textContent=c;
+    b.setAttribute('aria-pressed',c===cat);b.onclick=()=>{cat=c;renderChips();renderSvc()};$('chips').appendChild(b)});
+}
+function renderSvc(){
+  $('svcGrid').innerHTML='';
+  SERVICES.filter(s=>cat==='全部'||s.cat===cat).forEach(s=>{
+    const c=document.createElement('div');c.className='card svc';
+    c.innerHTML=`<div class="glyph">${s.name[0]}</div><h3>${s.name}</h3>
+      <div class="meta"><span>${fmtMin(s)}</span><span class="price">${fmtPrice(s)}</span></div>
+      <p>${s.d}</p>${s.until?'<div class="badge">限期至 2026/12/31</div>':''}
+      <a class="btn ghost sm" href="${dmUrl}" target="_blank" rel="noopener">私訊預約這個服務</a>`;
+    $('svcGrid').appendChild(c);
+  });
+}
+TEACHERS.forEach(t=>{
+  const c=document.createElement('div');c.className='card teacher';
+  c.innerHTML=`<img class="avatar" src="${t.img}" alt="${t.n}" width="76" height="76"><h3>${t.n}</h3><small>${t.role}</small><p>${t.bio}</p>`;
+  $('tGrid').appendChild(c);
+});
+
+/* 客戶回饋 */
+const DEMO_FB=[
+  {n:'小美',svc:'靈氣療癒',t:'做完整個人很放鬆，肩膀沒有那麼緊了，晚上睡得特別好。（示範回饋）'},
+  {n:'阿澄',svc:'樹洞聆聽',t:'被認真聽完的感覺很被接住，說出來之後心裡輕鬆很多。（示範回饋）'},
+  {n:'Mia',svc:'遠距靈氣',t:'沒想到線上也能感受到暖暖的能量，十五分鐘剛剛好。（示範回饋）'}
+];
+DEMO_FB.forEach(f=>{
+  const c=document.createElement('div');c.className='card fb';
+  c.innerHTML=`<p>${esc(f.t)}</p><div class="who"><span>${esc(f.n)}</span><span>${esc(f.svc)}</span></div>`;
+  $('fbWall').appendChild(c);
+});
+
+/* 彩虹牌抽卡（牌義可直接改這個陣列） */
+const RAINBOW=[
+  {n:'紅',kw:'勇氣・行動',c:['#ffd0d0','#f59a9a'],m:'今天適合跨出一小步。不需要想得很完整，先做最容易的那一件事，力量會跟著你的行動慢慢長出來。\n小提醒：喝一杯溫水，感覺雙腳踩在地上。'},
+  {n:'橙',kw:'創造・熱情',c:['#ffe2c4','#f7b27a'],m:'你心裡有一個想嘗試的念頭，它正在等你的允許。給自己一段不被評價的時間，隨手畫、寫、做都可以。\n小提醒：今天為自己做一件有趣的小事。'},
+  {n:'黃',kw:'喜悅・自信',c:['#fff4bd','#f3d65e'],m:'你比自己以為的更有光。記下今天三件做得不錯的事，哪怕很小，都值得被看見。\n小提醒：對鏡子裡的自己微笑一次。'},
+  {n:'綠',kw:'療癒・平衡',c:['#d6f2d3','#8fcf94'],m:'身體在提醒你放慢。允許自己休息，不需要為此找理由。照顧好自己，才有餘裕照顧別人。\n小提醒：到戶外走五分鐘，深呼吸三次。'},
+  {n:'藍',kw:'表達・傾聽',c:['#d3e9fb','#86bde8'],m:'有些話適合說出口，也有些話需要先對自己說清楚。試著用簡單的句子，誠實地表達你的感受。\n小提醒：把心裡的話寫下來，不用給任何人看。'},
+  {n:'靛',kw:'直覺・洞見',c:['#d9d7f7','#9a95de'],m:'安靜下來，你其實已經知道答案。相信第一個浮現的感覺，它通常比反覆思考更靠近真心。\n小提醒：睡前靜坐一分鐘，留意身體的聲音。'},
+  {n:'紫',kw:'連結・信任',c:['#ecd6f5','#c08fdc'],m:'你並不孤單，宇宙正在用你看不見的方式支持你。放下控制，信任事情會在對的時間發生。\n小提醒：對自己說：我值得被好好對待。'}
+];
+const deck=$('deck'),draw=$('draw');
+let drawn=false;
+function shuffle(){
+  const order=RAINBOW.map((_,i)=>i);
+  for(let i=order.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[order[i],order[j]]=[order[j],order[i]]}
+  drawn=false;draw.hidden=true;deck.innerHTML='';
+  order.forEach((ci,pos)=>{
+    const c=RAINBOW[ci],b=document.createElement('button');b.type='button';b.className='pk';b.setAttribute('aria-label','第 '+(pos+1)+' 張牌');
+    b.innerHTML=`<span class="in"><span class="b"></span><span class="f" style="background:linear-gradient(160deg,${c.c[0]},${c.c[1]})">${c.n}</span></span>`;
+    b.onclick=()=>pickCard(pos,ci);deck.appendChild(b);
+  });
+}
+function pickCard(pos,ci){
+  if(drawn)return;drawn=true;
+  const c=RAINBOW[ci];
+  [...deck.children].forEach((el,i)=>{el.disabled=true;el.classList.add(i===pos?'flip':'dim')});
+  setTimeout(()=>{
+    draw.hidden=false;
+    draw.innerHTML=`<div class="sw" style="background:linear-gradient(90deg,${c.c[0]},${c.c[1]})"></div><div class="kw">${c.kw}</div><h3>${c.n}色牌</h3><p>${esc(c.m)}</p>
+      <div class="cta"><a class="btn sm" href="${dmUrl}" target="_blank" rel="noopener">私訊預約深入解讀</a></div>`;
+    draw.scrollIntoView({behavior:'smooth',block:'nearest'});
+  },650);
+}
+$('reshuffle').onclick=shuffle;
+shuffle();
+
+/* FAQ */
+[
+ ['要怎麼預約？','直接私訊 Instagram @'+IG_HANDLE+'，告訴我想預約的服務與方便的時間，確認時段後就完成預約。'],
+ ['遠距靈氣要怎麼進行？','預約後會私訊你線上連結與準備方式，找一個安靜、不被打擾的地方，放鬆躺著或坐著即可。'],
+ ['可以取消或改期嗎？','可以，請在預約時間 24 小時前私訊告知，我們會協助改期。'],
+ ['公益隨喜療癒回饋是什麼？','2026/12/31 前的限定服務，金額隨喜，一部分會捐給公益。完成服務後，請留下一段文字回饋。'],
+ ['靈氣療癒適合什麼人？','感到疲累、壓力大，或想讓身心安定的人都可以。靈氣不能取代醫療，身體不適仍請就醫。']
+].forEach(([q,a])=>{const d=document.createElement('details');d.innerHTML=`<summary>${q}</summary><p>${a}</p>`;$('faqList').appendChild(d)});
+
+$('copyMail').onclick=()=>{
+  const b=$('copyMail'),t='a22817595@gmail.com';
+  const done=m=>{b.textContent=m;setTimeout(()=>b.textContent='複製信箱',1800)};
+  const sel=()=>{const r=document.createRange();r.selectNodeContents($('mailAddr'));const s=getSelection();s.removeAllRanges();s.addRange(r);done('請按複製')};
+  try{navigator.clipboard.writeText(t).then(()=>done('已複製'),sel)}catch(e){sel()}
+};
+renderChips();renderSvc();
+</script>
+</body>
+</html>
