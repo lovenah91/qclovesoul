@@ -347,7 +347,7 @@
     <div class="stat" style="--c:var(--clay)"><span class="k"><i></i>待辦</span><span class="v" id="sTodo">0</span></div>
     <div class="stat" style="--c:var(--lav)"><span class="k"><i></i>冥想</span><span class="v" id="sMed">0</span></div>
     <div class="stat" style="--c:var(--ochre)"><span class="k"><i></i>今日支出</span><span class="v" id="sMoney">0</span></div>
-    <div class="stat" style="--c:var(--slate)"><span class="k"><i></i>讀書</span><span class="v" id="sRead">0</span></div>
+    <div class="stat" style="--c:var(--slate)"><span class="k"><i></i>成長</span><span class="v" id="sRead">0</span></div>
     <div class="stat" style="--c:var(--rose)"><span class="k"><i></i>感恩</span><span class="v" id="sGrat">0</span></div>
     <div class="stat" style="--c:var(--sage)"><span class="k"><i></i>貢獻</span><span class="v" id="sContrib">0</span></div>
     <div class="stat" style="--c:var(--teal)"><span class="k"><i></i>轉念</span><span class="v" id="sShift">0</span></div>
@@ -403,15 +403,15 @@
     <!-- READING -->
     <section class="card read">
       <div class="card-h">
-        <div class="card-t"><div class="ic"><svg class="i" viewBox="0 0 24 24"><path d="M12 7.2C10 5.7 7.5 5.2 4 5.2v12.4c3.5 0 6 .5 8 2 2-1.5 4.5-2 8-2V5.2c-3.5 0-6 .5-8 2zm0 0v12.4"/></svg></div>
-          <div><span class="en">Reading Notes</span><h2>讀書心得</h2></div></div>
-        <span class="badge">本月 <span class="num" id="readBadge">0</span> 篇</span>
+        <div class="card-t"><div class="ic"><svg class="i" viewBox="0 0 24 24"><path d="M9.5 17.5h5M10 20h4M12 4a5.5 5.5 0 0 0-3.2 10c.5.4.8 1 .8 1.6v.4h4.8v-.4c0-.6.3-1.2.8-1.6A5.5 5.5 0 0 0 12 4z"/></svg></div>
+          <div><span class="en">Growth Notes</span><h2>成長心得</h2></div></div>
+        <span class="badge">本月 <span class="num" id="readBadge">0</span> 則</span>
       </div>
       <form class="add" id="readForm">
-        <input class="inp" id="readBook" placeholder="書名" maxlength="80" autocomplete="off" list="bookList">
+        <input class="inp" id="readBook" placeholder="主題或來源（選填）：一本書、一堂課、一段對話、生活裡的小事…" maxlength="80" autocomplete="off" list="bookList">
         <datalist id="bookList"></datalist>
         <div class="row">
-          <textarea class="inp" id="readNote" placeholder="今天讀到什麼、有什麼感受？" maxlength="2000"></textarea>
+          <textarea class="inp" id="readNote" placeholder="今天學到什麼新的知識？有什麼體悟？" maxlength="2000"></textarea>
           <button class="go" type="submit" aria-label="新增"><svg viewBox="0 0 24 24"><path d="M12 6v12M6 12h12"/></svg></button>
         </div>
       </form>
@@ -701,17 +701,17 @@
 
     /* reading */
     const rl = $('readList'); rl.replaceChildren();
-    if (!d.read.length) rl.append(emptyEl('a line worth keeping', '寫下今天讀到的一句話或一個感受'));
+    if (!d.read.length) rl.append(emptyEl('a little wiser today', '今天學到的新知識、新想法，都可以記下來'));
     for (const r of [...d.read].reverse()){
       rl.append(h('li', {class:'item book'},
-        h('div', {class:'bt'}, h('span', {class:'bn', text:'《' + (r.book || '未命名') + '》'}),
+        h('div', {class:'bt'}, r.book ? h('span', {class:'bn', text:r.book}) : h('span', {class:'bn en', text:'today I learned', style:'font-family:var(--latin);font-weight:400'}),
           delBtn(() => editDay(cur, x => { x.read = x.read.filter(j => j.id !== r.id); }))),
         r.note ? h('div', {class:'txt', text:r.note}) : null));
     }
     let rm = 0; const books = new Set();
     for (const k in days){ for (const r of (days[k].read||[])){ if (r.book) books.add(r.book); if (k.startsWith(ym)) rm++; } }
     $('readBadge').textContent = rm;
-    $('sRead').innerHTML = ''; $('sRead').append(String(d.read.length), h('small', {text:'篇'}));
+    $('sRead').innerHTML = ''; $('sRead').append(String(d.read.length), h('small', {text:'則'}));
     $('bookList').replaceChildren(...[...books].map(b => h('option', {value:b})));
 
     /* shift */
