@@ -26,6 +26,7 @@
     --lav:#8C7FAE;   --lav-bg:#ECE8F3;
     --slate:#6F8DAA; --slate-bg:#E4ECF3;
     --teal:#5F9693; --teal-bg:#E0EDEC;
+    --brave:#C9805A; --brave-bg:#F7E6DA;
     --serif:"Noto Serif TC",serif;
     --latin:"Cormorant Garamond",serif;
     --num:"Fraunces",serif;
@@ -100,6 +101,18 @@
   .money{--accent:var(--ochre);--tint:var(--ochre-bg)}
   .grat{--accent:var(--rose);--tint:var(--rose-bg)}
   .contrib{--accent:var(--sage);--tint:var(--sage-bg)}
+  .brave{--accent:var(--brave);--tint:var(--brave-bg)}
+  .seg{display:flex;border:1px solid var(--line);border-radius:999px;padding:3px;margin-bottom:12px;width:max-content}
+  .seg button{border:none;background:none;font:inherit;font-size:13px;color:var(--soft);padding:6px 16px;border-radius:999px;cursor:pointer;letter-spacing:.12em;transition:all .25s}
+  .seg button.on{background:var(--c);color:#fff}
+  [data-theme="noir"] .seg button.on{color:#1A1316}
+  .gc .go{background:var(--c)}
+  .gc .inp:focus{border-bottom-color:var(--c)}
+  .sub{display:flex;align-items:center;gap:8px;margin:14px 0 2px;font-size:12.5px;letter-spacing:.14em;color:var(--c)}
+  .sub::after{content:"";flex:1;height:1px;background:var(--line2)}
+  .sub .num{font-size:13px;color:var(--soft)}
+  .gc .item .no{color:var(--c)}
+  .brave .item .no{font-style:normal;font-size:15px}
   .med{--accent:var(--lav);--tint:var(--lav-bg)}
   .read{--accent:var(--slate);--tint:var(--slate-bg)}
   .shift{--accent:var(--teal);--tint:var(--teal-bg);grid-column:1/-1}
@@ -261,6 +274,7 @@
     --lav:#D9A9E6;   --lav-bg:rgba(217,169,230,.14);
     --slate:#A9C3EA; --slate-bg:rgba(169,195,234,.12);
     --teal:#8FD3CF; --teal-bg:rgba(143,211,207,.12);
+    --brave:#FFB48C; --brave-bg:rgba(255,180,140,.12);
   }
   [data-theme="noir"] body{
     background-color:var(--bg);
@@ -348,8 +362,8 @@
     <div class="stat" style="--c:var(--lav)"><span class="k"><i></i>冥想</span><span class="v" id="sMed">0</span></div>
     <div class="stat" style="--c:var(--ochre)"><span class="k"><i></i>今日支出</span><span class="v" id="sMoney">0</span></div>
     <div class="stat" style="--c:var(--slate)"><span class="k"><i></i>成長</span><span class="v" id="sRead">0</span></div>
-    <div class="stat" style="--c:var(--rose)"><span class="k"><i></i>感恩</span><span class="v" id="sGrat">0</span></div>
-    <div class="stat" style="--c:var(--sage)"><span class="k"><i></i>貢獻</span><span class="v" id="sContrib">0</span></div>
+    <div class="stat" style="--c:var(--rose)"><span class="k"><i></i>感恩貢獻</span><span class="v" id="sGC">0</span></div>
+    <div class="stat" style="--c:var(--brave)"><span class="k"><i></i>勇敢</span><span class="v" id="sBrave">0</span></div>
     <div class="stat" style="--c:var(--teal)"><span class="k"><i></i>轉念</span><span class="v" id="sShift">0</span></div>
   </div>
 
@@ -418,34 +432,38 @@
       <ul class="list" id="readList"></ul>
     </section>
 
-    <!-- GRATITUDE -->
-    <section class="card grat" id="gratCard">
+    <!-- GRATITUDE & CONTRIBUTION -->
+    <section class="card grat gc" id="gcCard" style="--c:var(--rose)">
       <div class="card-h">
         <div class="card-t"><div class="ic"><svg class="i" viewBox="0 0 24 24"><path d="M12 19s-7-4.3-7-9.2A3.8 3.8 0 0 1 12 8a3.8 3.8 0 0 1 7 1.8C19 14.7 12 19 12 19z"/></svg></div>
-          <div><span class="en">Gratitude</span><h2>感恩日記</h2></div></div>
-        <span class="badge"><span class="num" id="gratBadge">0</span> / 3</span>
+          <div><span class="en">Gratitude &amp; Contribution</span><h2>感恩與貢獻</h2></div></div>
+        <span class="badge"><span class="num" id="gcBadge">0</span> 件</span>
       </div>
-      <form class="add" id="gratForm">
-        <input class="inp" id="gratIn" placeholder="我感恩……" maxlength="200" autocomplete="off">
+      <div class="seg" id="gcSeg">
+        <button type="button" data-k="grat" class="on">感恩</button>
+        <button type="button" data-k="contrib">貢獻</button>
+      </div>
+      <form class="add" id="gcForm">
+        <input class="inp" id="gcIn" placeholder="我感恩……" maxlength="200" autocomplete="off">
         <button class="go" type="submit" aria-label="新增"><svg viewBox="0 0 24 24"><path d="M12 6v12M6 12h12"/></svg></button>
       </form>
-      <ul class="list" id="gratList"></ul>
-      <div class="stamp" id="gratStamp" hidden>今日份<br>感恩</div>
+      <div id="gcLists"></div>
+      <div class="stamp" id="gcStamp" hidden>今日份<br>圓滿</div>
     </section>
 
-    <!-- CONTRIBUTION -->
-    <section class="card contrib" id="contribCard">
+    <!-- BRAVE -->
+    <section class="card brave" id="braveCard">
       <div class="card-h">
-        <div class="card-t"><div class="ic"><svg class="i" viewBox="0 0 24 24"><path d="M12 20v-8m0 0c0-3.5-2.5-5.5-6.5-5.5 0 3.5 2.5 5.5 6.5 5.5zm0-1.6c0-3 2.2-5 6-5 0 3-2.2 5-6 5z"/></svg></div>
-          <div><span class="en">Contribution</span><h2>貢獻日記</h2></div></div>
-        <span class="badge"><span class="num" id="contribBadge">0</span> / 3</span>
+        <div class="card-t"><div class="ic"><svg class="i" viewBox="0 0 24 24"><path d="M12 3.5l2.4 5 5.4.7-4 3.8 1 5.4L12 15.8l-4.8 2.6 1-5.4-4-3.8 5.4-.7z"/></svg></div>
+          <div><span class="en">Brave List</span><h2>勇敢清單</h2></div></div>
+        <span class="badge">今日 <span class="num" id="braveBadge">0</span> 件</span>
       </div>
-      <form class="add" id="contribForm">
-        <input class="inp" id="contribIn" placeholder="今天我貢獻了……" maxlength="200" autocomplete="off">
+      <form class="add" id="braveForm">
+        <input class="inp" id="braveIn" placeholder="今天我勇敢地……" maxlength="200" autocomplete="off">
         <button class="go" type="submit" aria-label="新增"><svg viewBox="0 0 24 24"><path d="M12 6v12M6 12h12"/></svg></button>
       </form>
-      <ul class="list" id="contribList"></ul>
-      <div class="stamp" id="contribStamp" hidden>今日份<br>貢獻</div>
+      <ul class="list" id="braveList"></ul>
+      <div class="stamp" id="braveStamp" hidden>今日份<br>勇敢</div>
     </section>
 
     <!-- SHIFT -->
@@ -543,7 +561,8 @@
   let days = {};
   let selCat = 'food';
 
-  const empty = () => ({todos:[], exp:[], grat:[], contrib:[], med:{}, read:[], shift:[]});
+  const empty = () => ({todos:[], exp:[], grat:[], contrib:[], med:{}, read:[], shift:[], brave:[]});
+  let gcMode = 'grat';
   const MOODS = ['生氣','難過','焦慮','委屈','失望','疲憊','煩躁'];
   let selMood = '';
   function day(k){ const d = days[k]; return d ? Object.assign(empty(), d) : empty(); }
@@ -740,22 +759,33 @@
     $('sShift').innerHTML = ''; $('sShift').append(String(d.shift.length), h('small', {text:'次'}));
 
     /* journals */
-    journal('grat', d.grat, 'little blessings', '今天有什麼值得感謝的小事？');
-    journal('contrib', d.contrib, 'small kindnesses', '幫了誰、分享了什麼，都算數');
-    $('sGrat').innerHTML = ''; $('sGrat').append(String(d.grat.length), h('small', {text:'件'}));
-    $('sContrib').innerHTML = ''; $('sContrib').append(String(d.contrib.length), h('small', {text:'件'}));
-  }
+    const gl = $('gcLists'); gl.replaceChildren();
+    const gcTot = d.grat.length + d.contrib.length;
+    if (!gcTot) gl.append(h('ul', {class:'list'}, emptyEl('little blessings', '感謝的小事、幫助別人的小事，都值得記下')));
+    for (const [name, label, col] of [['grat','感恩','var(--rose)'],['contrib','貢獻','var(--sage)']]){
+      const arr = d[name]; if (!arr.length) continue;
+      gl.append(h('div', {class:'sub', style:'--c:' + col}, label, h('span', {class:'num', text:arr.length + ' / 3'})));
+      const ul = h('ul', {class:'list', style:'--c:' + col});
+      arr.forEach((g, i) => ul.append(h('li', {class:'item'},
+        h('span', {class:'no', text:String(i+1)}),
+        h('span', {class:'txt', text:g.t}),
+        delBtn(() => editDay(cur, x => { x[name] = x[name].filter(j => j.id !== g.id); })))));
+      gl.append(ul);
+    }
+    const full = d.grat.length >= 3 && d.contrib.length >= 3;
+    $('gcBadge').textContent = gcTot;
+    $('gcStamp').hidden = !full; $('gcCard').classList.toggle('has-stamp', full);
+    $('sGC').innerHTML = ''; $('sGC').append(String(gcTot), h('small', {text:'件'}));
 
-  function journal(name, arr, en, hint){
-    const ul = $(name + 'List'); ul.replaceChildren();
-    if (!arr.length) ul.append(emptyEl(en, hint));
-    arr.forEach((g, i) => ul.append(h('li', {class:'item'},
-      h('span', {class:'no', text:String(i+1)}),
+    const bl = $('braveList'); bl.replaceChildren();
+    if (!d.brave.length) bl.append(emptyEl('a little braver', '踏出舒適圈的每一小步，都算數'));
+    d.brave.forEach((g, i) => bl.append(h('li', {class:'item'},
+      h('span', {class:'no', text:'✦'}),
       h('span', {class:'txt', text:g.t}),
-      delBtn(() => editDay(cur, x => { x[name] = x[name].filter(j => j.id !== g.id); })))));
-    $(name + 'Badge').textContent = arr.length;
-    $(name + 'Stamp').hidden = arr.length < 3;
-    $(name + 'Card').classList.toggle('has-stamp', arr.length >= 3);
+      delBtn(() => editDay(cur, x => { x.brave = x.brave.filter(j => j.id !== g.id); })))));
+    $('braveBadge').textContent = d.brave.length;
+    $('braveStamp').hidden = !d.brave.length; $('braveCard').classList.toggle('has-stamp', d.brave.length > 0);
+    $('sBrave').innerHTML = ''; $('sBrave').append(String(d.brave.length), h('small', {text:'件'}));
   }
 
   function renderWeek(){
@@ -765,7 +795,7 @@
     for (let i = 0; i < 7; i++){
       const k = addDays(mon, i), dd = parse(k), x = day(k);
       const dots = h('div', {class:'dots'});
-      const has = [[x.todos.length,'var(--clay)'],[Object.keys(x.med||{}).length,'var(--lav)'],[x.exp.length,'var(--ochre)'],[x.read.length,'var(--slate)'],[x.grat.length,'var(--rose)'],[x.contrib.length,'var(--sage)'],[(x.shift||[]).length,'var(--teal)']];
+      const has = [[x.todos.length,'var(--clay)'],[Object.keys(x.med||{}).length,'var(--lav)'],[x.exp.length,'var(--ochre)'],[x.read.length,'var(--slate)'],[x.grat.length + x.contrib.length,'var(--rose)'],[(x.brave||[]).length,'var(--brave)'],[(x.shift||[]).length,'var(--teal)']];
       for (const [n,c] of has) if (n) dots.append(h('i', {style:'background:' + c}));
       w.append(h('div', {class:'wd' + (k === cur ? ' on' : '') + (k === today ? ' today' : ''), role:'button', tabindex:'0',
         onclick: () => { cur = k; render(); }, onkeydown: ev => { if (ev.key === 'Enter'){ cur = k; render(); } }},
@@ -816,12 +846,23 @@
     editDay(cur, x => x.read.push({id:uid(), book:b, note:n}));
     $('readNote').value = '';
   });
-  for (const name of ['grat','contrib']){
-    $(name + 'Form').addEventListener('submit', ev => { ev.preventDefault();
-      const inp = $(name + 'In'); const v = inp.value.trim(); if (!v) return;
-      editDay(cur, x => x[name].push({id:uid(), t:v})); inp.value = '';
-    });
+  function setGc(k){
+    gcMode = k;
+    for (const b of $('gcSeg').children) b.classList.toggle('on', b.dataset.k === k);
+    $('gcCard').style.setProperty('--c', k === 'grat' ? 'var(--rose)' : 'var(--sage)');
+    $('gcIn').placeholder = k === 'grat' ? '我感恩……' : '今天我貢獻了……';
   }
+  for (const b of $('gcSeg').children) b.onclick = () => { setGc(b.dataset.k); $('gcIn').focus(); };
+  $('gcForm').addEventListener('submit', ev => { ev.preventDefault();
+    const v = $('gcIn').value.trim(); if (!v) return;
+    editDay(cur, x => x[gcMode].push({id:uid(), t:v})); $('gcIn').value = '';
+  });
+  $('braveForm').addEventListener('submit', ev => { ev.preventDefault();
+    const v = $('braveIn').value.trim(); if (!v) return;
+    const first = !day(cur).brave.length;
+    editDay(cur, x => x.brave.push({id:uid(), t:v})); $('braveIn').value = '';
+    if (first) petals($('braveStamp'), 14, 90);
+  });
   function renderMoods(){
     $('moods').replaceChildren(...MOODS.map(m => h('button', {type:'button', class:'mood' + (m === selMood ? ' on' : ''), text:m,
       onclick: () => { selMood = selMood === m ? '' : m; renderMoods(); }})));
